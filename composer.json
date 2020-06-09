@@ -1,0 +1,13 @@
+{  "name": "Aitech-asia/pro-links",
+  "authors": [
+    {
+      "name": "Do Quang Thanh",
+      "email": "thanh@aitech.asia"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "ProCore\\": "core/"
+    }
+  }
+}

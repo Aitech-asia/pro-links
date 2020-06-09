@@ -1,0 +1,134 @@
+<section class="base-after-signup-login-feature base-after-signup-login__tabcontent">
+    <div class="base-core-row">
+        <div class="base-after-signup-login-recommend-app__three-col">
+
+            <article id="app-user-agent" class="base-after-signup-login-feature__media">
+                <div class="base-after-signup-login-feature__desc">
+                    <div class="base-after-signup-login-feature__app">
+                        <div class="base-after-signup-login-feature__ico">
+                            <?php if (isset($_GET["id"])) :?>
+                                <div id="message" class="updated notice is-dismissible"><p>Link <?php echo  $_GET["id"];?>  moved to the Trash.</p><button type="button" class="notice-dismiss"><span class="screen-reader-text">Dismiss this notice.</span></button></div>
+                            <?php endif;?>
+                            <h2>Link Manager</h2>
+                            <?php
+                            $nonce = wp_create_nonce( 'music_board_file_delete' );
+                            $url_base = esc_url('admin.php?page='.PRO_LINKS_SLUG);
+                            $url_add = $url_base.'&action=main&event=add';
+                            $status = isset($_GET['post_status']) ? $_GET['post_status'] : '-1';
+                            $current_page = isset($_GET['paged']) ? $_GET['paged'] : 1;
+                            $keyword = isset($_GET['search']) ? $_GET['search'] : '';
+                            $url_delete = esc_url('admin.php?page='.PRO_LINKS_SLUG.'&action=main&event=list&paged='.$current_page.'&_wpnonce='.$nonce);
+                            $ccurent = 'class="current" aria-current="page"';
+
+
+                            ?>
+                            <a href="<?php echo $url_add;?>" type="button" class="base-core-button base-core-button--alt-green btn-start-now">Add Affiliate Link</a>
+
+                            <form action="<?php echo $url_base?>" method="get">
+                                <p class="search-box">
+
+                                    <label class="screen-reader-text" for="post-search-input">Search Posts:</label>
+                                    <input type="hidden"  name="page" value="music-auto-board">
+                                    <input type="hidden"  name="action" value="file">
+                                    <input type="hidden"  name="event" value="list">
+                                    <input type="search" id="post-search-input" name="search" value="<?php echo $keyword;?>">
+                                    <input type="submit" id="search-submit" class="button" value="Search Pubg File">
+
+                                </p>
+                            </form>
+                            <div class="tablenav top"></div>
+                            <table class="wp-list-table widefat fixed striped posts">
+                                <thead>
+                                <tr>
+                                    <td id="cb" class="manage-column column-cb check-column"><label
+                                            class="screen-reader-text" for="cb-select-all-1">Select
+                                            All</label><input id="cb-select-all-1" type="checkbox"></td>
+                                    <th scope="col" id="name"
+                                        class="manage-column column-name column-primary sortable desc"><a
+                                            href="<?php echo $url_base; ?>&amp;order=desc"><span>Name</span><span
+                                                class="sorting-indicator"></span></a></th>
+                                    <th scope="col" id="is_in_stock" class="manage-column column-is_in_stock">Status
+                                    </th>
+
+
+                                    <th scope="col" id="featured" class="manage-column column-featured"
+                                        style="cursor: help;"><span class="wc-featured parent-tips" data-tip="Featured">Pro Link</span>
+                                    </th>
+                                    <th scope="col" id="date" class="manage-column column-date sortable asc"><a
+                                            href="<?php echo $url_base; ?>&amp;orderby=create_at&amp;order=desc"><span>Date</span><span
+                                                class="sorting-indicator"></span></a></th>
+                                </tr>
+                                </thead>
+
+                                <tbody id="the-list">
+                                <?php foreach ($this->getLinkAll as $getLinkAll):
+                                    $pro_links =  get_home_url().'/go/'.esc_html($getLinkAll["slug"]);
+                                    ?>
+
+                                    <tr id="post-<?php printf('%s', esc_html($getLinkAll["id"])) ?>"
+                                        class="iedit author-self level-0 post-11432 type-product status-publish hentry product_cat-uncategorized">
+                                        <th scope="row" class="check-column"><input name="id" id="cb-select-all-<?php echo $getLinkAll["id"];?>" type="checkbox"></th>
+                                        <td class="name column-name has-row-actions column-primary" data-colname="Name">
+                                            <strong><a class="row-title"
+                                                       href="<?php printf('%s', esc_html($getLinkAll["id"])) ?>"
+                                                       target="_blank"><?php printf('%s', esc_html($getLinkAll["name"])) ?></a></strong>
+
+                                        </td>
+
+                                        <td class="is_in_stock column-is_in_stock" data-colname="Stock">
+                                            <mark class="instock"><?php echo 1; ?></mark>
+                                        </td>
+
+                                        <td class="featured column-featured" data-colname="Featured">
+                                            <?php
+                                            if (esc_html($getLinkAll["slug"]) != ""):
+                                                ?>
+                                                <a href="<?php echo $pro_links; ?>" target="_blank"
+                                                   aria-label="Toggle featured">
+                                                    <span class="wc-featured not-featured tips"><?php echo $pro_links; ?></span>
+                                                </a>
+                                            <?php else: ?>
+                                                No
+                                            <?php endif; ?>
+                                        </td>
+                                        <td class="date column-date" data-colname="Date">
+                                            CrateAt<br><span><?php printf('%s', esc_html($getLinkAll["created_at"])) ?></span>
+                                            <div class="row-actions"><span class="edit"><a
+                                                        href="<?php echo $url_edit."&id=".$getLinkAll["id"]?>"
+                                                        aria-label="Edit “<?php printf('%s', esc_html($getLinkAll["name"])) ?>”">Edit</a> | </span><span
+                                                    class="trash"><a
+                                                        href="<?php echo $url_delete."&id=".$getLinkAll["id"]?>"
+                                                        class="submitdelete"
+                                                        aria-label="Move “<?php printf('%s', esc_html($getLinkAll["name"])) ?>” to the Trash">Trash</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                <?php endforeach; ?>
+                                </tbody>
+
+
+                            </table>
+                            <div class="tablenav bottom">
+                                <div class="tablenav-pages">
+                                    <?php
+                                    if(isset($_GET['search'])==false):
+                                        $total = $this->countLinkAll;
+                                        $record_page = ceil($total / LIMIT_PAGE);
+                                        $argv = [
+                                            "page_count" => $record_page,
+                                            "paged" => $current_page
+                                        ];
+                                        $this->Pagination($argv);
+                                    endif;
+                                    ?>
+                                </div>
+                                <div id="ajax-response"></div>
+                                <br class="clear">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

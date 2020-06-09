@@ -1,0 +1,92 @@
+<section class="base-after-signup-login-feature base-after-signup-login__tabcontent">
+    <div class="base-core-row">
+        <div class="base-after-signup-login-recommend-app__three-col">
+
+            <article id="app-user-agent" class="base-after-signup-login-feature__media">
+                <div class="base-after-signup-login-feature__desc">
+                    <div class="base-after-signup-login-feature__app">
+                        <div class="base-after-signup-login-feature__ico">
+
+                            <?php
+                            $url_base = esc_url('admin.php?page='.PRO_LINKS_SLUG);
+                            $url_add = $url_base.'&action=main&event=add';
+
+                            ?>
+                            <h2>Add new</h2>
+                            <form action="<?php echo $url_add ?>"  method="post">
+                                <table class="wp-list-table widefat fixed striped posts">
+
+                                    <tbody id="the-list">
+                                    <?php wp_nonce_field('pro_affiliate_Link_add') ?>
+                                    <tr id="post-link"
+                                        class="iedit author-self level-0  type-product status-publish hentry product_cat-uncategorized">
+                                        <th scope="col">Name</th>
+                                        <td class="name column-name has-row-actions column-primary" data-colname="Name">
+                                            <input name="name" type="text" size="255"
+                                                   value=""><label
+                                                class="base-label"
+                                                for="base_name_link">
+                                                Example: <span class="base-light-text">site.com/go/name </span></label>
+                                        </td>
+                                    </tr>
+                                    <tr id="post-pid"
+                                        class="iedit author-self level-0 post-11432 type-product status-publish hentry product_cat-uncategorized">
+                                        <th scope="col">Redirection</th>
+                                        <td class="name column-name has-row-actions column-primary" data-colname="Name">
+                                            <select id="redirect_type" name="redirect_type">
+                                                <option value="307" selected="selected">307 (Temporary)&nbsp;</option>
+                                                <option value="302">302 (Temporary)&nbsp;</option>
+                                                <option value="301">301 (Permanent)&nbsp;</option>
+                                            </select>
+                                            <label  class="base-label"  for="base_redirect_type"
+                                                    Get cloaked redirects, Javascript redirects and more</label>
+                                        </td>
+                                    </tr>
+
+                                    <tr id="post-publink"
+                                        class="iedit author-self level-0 post-11432 type-product status-publish hentry product_cat-uncategorized">
+                                        <th scope="col">Target URL* </th>
+                                        <td class="name column-name has-row-actions column-primary" data-colname="Name">
+                                            <input name="target_url" type="text" size="200"
+                                                   value=""><label
+                                                class="base-label"
+                                                for="base_target_url">
+                                                Example: <span
+                                                    class="base-light-text">hhttps://tiki.vn/chuong-trinh/uu-dai-sacombank-thang-2-2020?utm_campaign=AFF_NBR_ACT_tuananh_TI2_ALL_VN_ALL_UNK_UNK_N.1473&utm_medium=hVsdsdsdsdm0cplLBt9sSADRntQ2FVNRPiiGJAgC9&utm_source=accesstrade&aff_sid=ADAASASSNRPiiGJAgC9</span></label>
+                                        </td>
+                                    </tr>
+                                    <tr id="post-publink"
+                                        class="iedit author-self level-0 post-11432 type-product status-publish hentry product_cat-uncategorized">
+                                        <th scope="col">Notes </th>
+                                        <td class="name column-name has-row-actions column-primary" data-colname="Name">
+                                            <input name="notes" type="text" size="1"
+                                                   value=""><label
+                                                class="base-label"
+                                                for="base_notes">
+                                                This is a field where you can enter notes about a particular link. This notes field is mainly for your own link management needs. It isn't currently used anywhere on the front end.</label>
+                                        </td>
+                                    </tr>
+                                    <tr id="post-button"
+                                        class="iedit author-self level-0  type-product status-publish hentry product_cat-uncategorized">
+                                        <th scope="col"></th>
+                                        <td class="name column-name has-row-actions column-primary" data-colname="Name">
+                                            <input name="id" type="hidden"
+                                                   value="<?php echo $this->getLink["id"]; ?>">
+                                            <?php submit_button(__('Save Link', 'pro-link')) ?>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </form>
+                            <div class="tablenav bottom">
+
+                                <div id="ajax-response"></div>
+                                <br class="clear">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>

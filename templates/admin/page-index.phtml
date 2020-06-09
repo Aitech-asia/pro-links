@@ -1,0 +1,16 @@
+<div class="base-core-frame">
+    <section class="base-after-signup-login-support-review">
+        <div class="base-core-row">
+            <h1><?php echo __(PRO_LINKS_NAME, 'pro-link'); ?></h1>
+        </div>
+    </section>
+
+    <?php
+    if (isset($_GET['action']) && isset($_GET['event']) && file_exists(PRO_LINKS_PLUGIN_DIR . '/templates/admin/page-' . $_GET['action'] . '-' . $_GET['event'] . '.phtml')) {
+        $this->load_template('page-' . $_GET['action'] . '-' . $_GET['event']);
+    } else {
+        $this->load_template('page-main');
+    }
+    $this->load_template('page-support');
+    ?>
+</div>
